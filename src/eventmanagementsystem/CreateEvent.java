@@ -43,7 +43,7 @@ public class CreateEvent extends javax.swing.JFrame {
         service = new javax.swing.JComboBox<>();
         date = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        describ = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,9 +74,9 @@ public class CreateEvent extends javax.swing.JFrame {
 
         date.setDateFormatString("yyyy-MM-dd");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        describ.setColumns(20);
+        describ.setRows(5);
+        jScrollPane1.setViewportView(describ);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,13 +205,13 @@ public class CreateEvent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser date;
+    private javax.swing.JTextArea describ;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField location;
     private javax.swing.JButton save;
     private javax.swing.JComboBox<String> service;
