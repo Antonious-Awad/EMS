@@ -95,5 +95,18 @@ public abstract class User {
             return 0;
         }
     }
-    
+    public long getId(String email) {
+        try {
+            String sql = "select userid from tblusers " +
+                    "where email ='"+email+"'";
+            ResultSet rs =con.executeQuery(sql);
+            while(rs.next()){
+                 id = rs.getLong(1);
+            }
+            return id ;
+        } catch (SQLException ex) {
+            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
+            return id;
+        }
+    }
 }

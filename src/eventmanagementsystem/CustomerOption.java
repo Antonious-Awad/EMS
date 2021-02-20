@@ -104,6 +104,11 @@ public class CustomerOption extends javax.swing.JFrame {
 
     private void eventMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventMActionPerformed
         // TODO add your handling code here:
+        ManageEvent1 m = new ManageEvent1(this.id);
+        m.setLocation(400, 200);
+        m.setSize(800,500);
+        m.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_eventMActionPerformed
 
     private void contactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactActionPerformed

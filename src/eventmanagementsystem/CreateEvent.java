@@ -14,7 +14,9 @@ import javax.swing.JTextField;
  * @author OWNER
  */
 public class CreateEvent extends javax.swing.JFrame {
+
     long id;
+
     /**
      * Creates new form CreateEvent
      */
@@ -148,20 +150,25 @@ public class CreateEvent extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
-       String title = this.title.getText();
-       String description = describ.getText();
-       String location = this.location.getText();
-       int service = this.service.getSelectedIndex();
-       String date = ((JTextField)this.date.getDateEditor().getUiComponent()).getText();
-       Event e = new Event();
-       int result = e.createEvent(title, description, date, location, service,this.id);
-       if(result == 1){
-           JOptionPane.showMessageDialog(null,"Event Created","Success",JOptionPane.INFORMATION_MESSAGE);
-       } else {
-            JOptionPane.showMessageDialog(null,"Check your Information","Failed",JOptionPane.ERROR_MESSAGE);
-       
-       }
-           
+        String title = this.title.getText();
+        String description = describ.getText();
+        String location = this.location.getText();
+        int service = this.service.getSelectedIndex();
+        String date = ((JTextField) this.date.getDateEditor().getUiComponent()).getText();
+        Customer c = new Customer();
+        int result = c.createEvent(title, description, date, location, service, this.id);
+        if (result == 1) {
+            JOptionPane.showMessageDialog(null, "Event Created", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Check your Information", "Failed", JOptionPane.ERROR_MESSAGE);
+
+        }
+        CustomerOption co = new CustomerOption(id);
+        co.setLocation(400, 200);
+        co.setSize(450, 350);
+        co.setVisible(true);
+        this.dispose();
+
     }//GEN-LAST:event_saveActionPerformed
 
     private void titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleActionPerformed
@@ -198,7 +205,7 @@ public class CreateEvent extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-             // new CreateEvent(8).setVisible(true);
+                // new CreateEvent(8).setVisible(true);
             }
         });
     }

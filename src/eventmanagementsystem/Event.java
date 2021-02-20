@@ -27,18 +27,18 @@ public class Event  {
                 , "jdbc:sqlserver://localhost\\TONYPC\\SQLEXPRESS:1433;databaseName=event_mangment_system"
                 , "sa", "12345");
     }
-    public int createEvent(String eventTitle, String eventDescription, String date, String location,int serviceId,long customer_id){
-        this.eventTitle = eventTitle;
-        this.eventDescription = eventDescription;
-        this.date = date;
-        this.location = location;
-        this.serviceId = serviceId;
-        this.customerId = customer_id;
-        String sql ="INSERT INTO events (eventname,description,location,date,serviceid,customer_id)"+
-        " VALUES('"+this.eventTitle+"','"+this.eventDescription+"','"+this.location+"','"+this.date+"','"+this.serviceId+"','"+this.customerId+"')";
-       int result =con.excuteUpdate(sql);
-       return result;
-    }
+//    public int createEvent(String eventTitle, String eventDescription, String date, String location,int serviceId,long customer_id){
+//        this.eventTitle = eventTitle;
+//        this.eventDescription = eventDescription;
+//        this.date = date;
+//        this.location = location;
+//        this.serviceId = serviceId;
+//        this.customerId = customer_id;
+//        String sql ="INSERT INTO events (eventname,description,location,date,serviceid,customer_id)"+
+//        " VALUES('"+this.eventTitle+"','"+this.eventDescription+"','"+this.location+"','"+this.date+"','"+this.serviceId+"','"+this.customerId+"')";
+//       int result =con.excuteUpdate(sql);
+//       return result;
+//    }
 
     
 }

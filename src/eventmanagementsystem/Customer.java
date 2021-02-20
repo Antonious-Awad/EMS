@@ -14,58 +14,31 @@ import java.util.logging.Logger;
  */
 import java.sql.*;
 import javax.swing.JOptionPane;
+
 public class Customer extends User {
+
     DatabaseConnection con;
 
     public Customer() {
-    con = new DatabaseConnection("com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                , "jdbc:sqlserver://localhost\\TONYPC\\SQLEXPRESS:1433;databaseName=event_mangment_system"
-                , "sa", "12345");
-    this. role_id = 1;
+        con = new DatabaseConnection("com.microsoft.sqlserver.jdbc.SQLServerDriver",
+                 "jdbc:sqlserver://localhost\\TONYPC\\SQLEXPRESS:1433;databaseName=event_mangment_system",
+                 "sa", "12345");
+        this.role_id = 1;
     }
-   
-    public long getId(String email) {
-        try {
-            String sql = "select userid from tblusers " +
-                    "where email ='"+email+"'";
-            long userid = 0;
-            ResultSet rs =con.executeQuery(sql);
-            while(rs.next()){
-                 id = rs.getLong(1);
-            }
-            return id ;
-        } catch (SQLException ex) {
-            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
-            return id;
-        }
+    public int createEvent(String eventTitle, String eventDescription, String date,
+            String location, int serviceId, long customer_id) {
+        String sql = "INSERT INTO events (eventname,description,location,date,serviceid,customer_id)"
+                + " VALUES('" + eventTitle + "','" + eventDescription + "','" + location + "','" + date + "','" + serviceId + "','" + customer_id + "')";
+        int result = con.excuteUpdate(sql);
+        return result;
     }
-
-    public String getEmail() {
-        return email;
+    public ResultSet showEvents(long customerID ){
+        String sql = "Select eventid,eventname,description,servicename,location,date\n"+
+                    "From events\n"+
+                    "join services\n"+
+                    "on events.serviceid = services.serviceid\n"+
+                    "where customer_id= "+customerID+"\n";
+        return con.executeQuery(sql);
     }
 
-    public String getPass() {
-        return pass;
-    }
-
-    public long getPhone() {
-        return phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public int getRole_id() {
-        return role_id;
-    }
-    
-
-//    
-//    public void createEvent(){
-//        Event e = new Event();
-//    }
-    
-
-   
 }
