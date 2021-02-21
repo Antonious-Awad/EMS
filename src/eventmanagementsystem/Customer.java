@@ -38,7 +38,31 @@ public class Customer extends User {
                     "join services\n"+
                     "on events.serviceid = services.serviceid\n"+
                     "where customer_id= "+customerID+"\n";
-        return con.executeQuery(sql);
+        ResultSet rs=  con.executeQuery(sql);
+        return rs;
     }
-
+    
+    public ResultSet getEventInfo(long eID){
+        
+       String sql ="select eventname,description,serviceid,location,date\n"+
+               "from events\n"+
+               "where eventid= "+ eID ;
+       return con.executeQuery(sql);
+        
+    }
+    public int deleteEvent(long eID)
+    {
+      String sql ="delete from events where eventid= "+ eID;
+              
+              return con.excuteUpdate(sql);
+    }
+    public int updateEvent(long eID,String name ,String desc,int service, String loc , String date ){
+        String sql="update events set eventname= '"+name+"', "
+        + "description ='"+desc+"', "
+        + "serviceid ='"+service+"', "
+        + "location ='"+loc+"', "
+        + "date='"+date+"' "
+        + "where eventid =" +eID;
+        return con.excuteUpdate(sql);
+    }
 }

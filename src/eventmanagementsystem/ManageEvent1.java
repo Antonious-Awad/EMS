@@ -20,9 +20,11 @@ public class ManageEvent1 extends javax.swing.JFrame {
      * Creates new form ManageEvent
      */
     DefaultTableModel dtm = new DefaultTableModel();
+    long customerID;
     public ManageEvent1(long customerID) {
         try {
             initComponents();
+            this.customerID = customerID;
             table.setModel(dtm);
             dtm.addColumn("Event ID");
             dtm.addColumn("Name");
@@ -35,6 +37,7 @@ public class ManageEvent1 extends javax.swing.JFrame {
             while (rs.next()){
                 dtm.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(ManageEvent1.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -112,6 +115,13 @@ public class ManageEvent1 extends javax.swing.JFrame {
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
+        int row = table.getSelectedRow();
+        int Eventid = (int)table.getValueAt(row, 0);
+        ManageEvent2 m = new ManageEvent2(Eventid,customerID);
+        m.setLocation(400, 200);
+        m.setSize(500,500);
+        m.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_updateActionPerformed
 
     /**
