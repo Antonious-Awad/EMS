@@ -10,6 +10,8 @@ package eventmanagementsystem;
  * @author OWNER
  */
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -32,13 +34,17 @@ public class ManageEvent2 extends javax.swing.JFrame {
             while (rs.next()) {
                 Ename.setText(rs.getString(1));
                 desc.setText(rs.getString(2));
-                //service
+                service.setSelectedIndex(rs.getInt(3));
                 loc.setText(rs.getString(4));
-                //date
+                java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString(5));
+                edate.setDate(date);
+                
 
             }
             
         } catch (SQLException ex) {
+            Logger.getLogger(ManageEvent2.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(ManageEvent2.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
             this.eID = eID;
@@ -70,7 +76,8 @@ public class ManageEvent2 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         desc = new javax.swing.JTextArea();
         service = new javax.swing.JComboBox<>();
-        date = new com.toedter.calendar.JDateChooser();
+        edate = new com.toedter.calendar.JDateChooser();
+        exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,6 +131,13 @@ public class ManageEvent2 extends javax.swing.JFrame {
             }
         });
 
+        exit.setText("Exit");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,13 +158,15 @@ public class ManageEvent2 extends javax.swing.JFrame {
                     .addComponent(loc)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
                     .addComponent(service, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(edate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(296, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(162, 162, 162)
                 .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(91, 91, 91)
                 .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -183,11 +199,12 @@ public class ManageEvent2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(delete)
-                    .addComponent(update))
+                    .addComponent(update)
+                    .addComponent(exit))
                 .addGap(36, 36, 36))
         );
 
@@ -230,7 +247,7 @@ public class ManageEvent2 extends javax.swing.JFrame {
         String describ = desc.getText();
         int service = this.service.getSelectedIndex();
         String loc = this.loc.getText();
-        String date = ((JTextField) this.date.getDateEditor().getUiComponent()).getText();
+        String date = ((JTextField) this.edate.getDateEditor().getUiComponent()).getText();
         Customer c = new Customer();
         int result = c.updateEvent(ID, name, describ, service, loc, date);
         if (result == 1) {
@@ -245,6 +262,15 @@ public class ManageEvent2 extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_updateActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        // TODO add your handling code here:
+        ManageEvent1 m = new ManageEvent1(cID);
+            m.setLocation(400, 200);
+            m.setSize(800, 500);
+            m.setVisible(true);
+            this.dispose();
+    }//GEN-LAST:event_exitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,10 +310,11 @@ public class ManageEvent2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Ename;
-    private com.toedter.calendar.JDateChooser date;
     private javax.swing.JButton delete;
     private javax.swing.JTextArea desc;
+    private com.toedter.calendar.JDateChooser edate;
     private javax.swing.JTextField eventid;
+    private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

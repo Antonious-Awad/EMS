@@ -40,7 +40,7 @@
                   <Component id="loc" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" pref="216" max="32767" attributes="0"/>
                   <Component id="service" max="32767" attributes="0"/>
-                  <Component id="date" max="32767" attributes="0"/>
+                  <Component id="edate" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="296" max="32767" attributes="0"/>
           </Group>
@@ -49,6 +49,8 @@
               <Component id="delete" min="-2" pref="96" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
               <Component id="update" min="-2" pref="101" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <Component id="exit" min="-2" pref="91" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -90,12 +92,13 @@
               <EmptySpace pref="42" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                  <Component id="date" min="-2" max="-2" attributes="0"/>
+                  <Component id="edate" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="delete" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="update" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="exit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
           </Group>
@@ -198,7 +201,15 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="date">
+    <Component class="com.toedter.calendar.JDateChooser" name="edate">
+    </Component>
+    <Component class="javax.swing.JButton" name="exit">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Exit"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
