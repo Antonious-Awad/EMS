@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanagementsystem;
+package Customer;
 
 /**
  *
@@ -23,14 +23,15 @@ public class ManageEvent2 extends javax.swing.JFrame {
      * Creates new form MangeEvent2
      */
     long eID;
-    long cID;
+    Customer cust;
 
-    public ManageEvent2(long eID, long cID) {
+    public ManageEvent2(long eID, Customer cust) {
         try {
             initComponents();
+            this.cust = cust;
             eventid.setText(eID + "");
-            Customer c = new Customer();
-            ResultSet rs = c.getEventInfo(eID);
+            //Customer c = new Customer();
+            ResultSet rs = this.cust.getEventInfo(eID);
             while (rs.next()) {
                 Ename.setText(rs.getString(1));
                 desc.setText(rs.getString(2));
@@ -48,7 +49,7 @@ public class ManageEvent2 extends javax.swing.JFrame {
             Logger.getLogger(ManageEvent2.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
             this.eID = eID;
-            this.cID = cID;
+            //this.cID = cID;
         }
 
     }
@@ -225,11 +226,11 @@ public class ManageEvent2 extends javax.swing.JFrame {
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
-        Customer c = new Customer();
-        int result = c.deleteEvent(Integer.parseInt(eventid.getText()));
+        //Customer c = new Customer();
+        int result = cust.deleteEvent(Integer.parseInt(eventid.getText()));
         if (result == 1) {
             JOptionPane.showMessageDialog(null, "Event Deleted", "Success", JOptionPane.INFORMATION_MESSAGE);
-            ManageEvent1 m = new ManageEvent1(this.cID);
+            ManageEvent1 m = new ManageEvent1(this.cust);
             m.setLocation(400, 200);
             m.setSize(800, 500);
             m.setVisible(true);
@@ -248,11 +249,11 @@ public class ManageEvent2 extends javax.swing.JFrame {
         int service = this.service.getSelectedIndex();
         String loc = this.loc.getText();
         String date = ((JTextField) this.edate.getDateEditor().getUiComponent()).getText();
-        Customer c = new Customer();
-        int result = c.updateEvent(ID, name, describ, service, loc, date);
+        //Customer c = new Customer();
+        int result = cust.updateEvent(ID, name, describ, service, loc, date);
         if (result == 1) {
             JOptionPane.showMessageDialog(null, "Event Updated", "Success", JOptionPane.INFORMATION_MESSAGE);
-            ManageEvent1 m = new ManageEvent1(cID);
+            ManageEvent1 m = new ManageEvent1(cust);
             m.setLocation(400, 200);
             m.setSize(800, 500);
             m.setVisible(true);
@@ -265,7 +266,7 @@ public class ManageEvent2 extends javax.swing.JFrame {
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
-        ManageEvent1 m = new ManageEvent1(cID);
+        ManageEvent1 m = new ManageEvent1(cust);
             m.setLocation(400, 200);
             m.setSize(800, 500);
             m.setVisible(true);

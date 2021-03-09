@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanagementsystem;
+package Customer;
 
+import EMS.DatabaseConnection;
 import java.util.Date;
 
 /**

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanagementsystem;
+package Customer;
 
+import EMS.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,12 +18,12 @@ import javax.swing.JOptionPane;
 
 public class Customer extends User {
 
-    DatabaseConnection con;
+    //DatabaseConnection con;
 
     public Customer() {
-        con = new DatabaseConnection("com.microsoft.sqlserver.jdbc.SQLServerDriver",
-                 "jdbc:sqlserver://localhost\\TONYPC\\SQLEXPRESS:1433;databaseName=event_mangment_system",
-                 "sa", "12345");
+//        con = new DatabaseConnection("com.microsoft.sqlserver.jdbc.SQLServerDriver",
+//                 "jdbc:sqlserver://localhost\\TONYPC\\SQLEXPRESS:1433;databaseName=event_mangment_system",
+//                 "sa", "12345");
         this.role_id = 1;
     }
     public int createEvent(String eventTitle, String eventDescription, String date,

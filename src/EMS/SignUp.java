@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanagementsystem;
+package EMS;
 
 /**
  *
  * @author OWNER
  */
+import Customer.Customer;
+import EMS.Welcome;
 import javax.swing.*;
+import ServiceProvider.serviceProvider;
 
 public class SignUp extends javax.swing.JFrame {
 
@@ -189,6 +192,18 @@ public class SignUp extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Invalid Email or Password", "Error", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                serviceProvider sp = new serviceProvider();
+                 result = sp.createAccount(email, pass, phone, addr, role);
+                if (result == 1) {
+                    JOptionPane.showMessageDialog(null, "Account Created", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Email or Password", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
 
         }
         if(result ==1){

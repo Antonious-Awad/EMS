@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanagementsystem;
+package Customer;
 
 /**
  *
@@ -20,11 +20,11 @@ public class ManageEvent1 extends javax.swing.JFrame {
      * Creates new form ManageEvent
      */
     DefaultTableModel dtm = new DefaultTableModel();
-    long customerID;
-    public ManageEvent1(long customerID) {
+    Customer cust;
+    public ManageEvent1(Customer cust) {
         try {
             initComponents();
-            this.customerID = customerID;
+            this.cust = cust;
             table.setModel(dtm);
             dtm.addColumn("Event ID");
             dtm.addColumn("Name");
@@ -32,8 +32,8 @@ public class ManageEvent1 extends javax.swing.JFrame {
             dtm.addColumn("Service Type");
             dtm.addColumn("Location");
             dtm.addColumn("Date");
-            Customer c = new Customer();
-            ResultSet rs = c.showEvents(customerID);
+            //Customer c = new Customer();
+            ResultSet rs = cust.showEvents(this.cust.getId());
             while (rs.next()){
                 dtm.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
             }
@@ -129,7 +129,7 @@ public class ManageEvent1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = table.getSelectedRow();
         int Eventid = (int)table.getValueAt(row, 0);
-        ManageEvent2 m = new ManageEvent2(Eventid,customerID);
+        ManageEvent2 m = new ManageEvent2(Eventid,cust);
         m.setLocation(400, 200);
         m.setSize(500,500);
         m.setVisible(true);
@@ -138,7 +138,7 @@ public class ManageEvent1 extends javax.swing.JFrame {
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
-        CustomerOption co = new CustomerOption(customerID);
+        CustomerOption co = new CustomerOption(cust);
                     co.setLocation(400, 200);
                     co.setSize(450, 350);
                     co.setVisible(true);

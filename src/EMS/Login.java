@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanagementsystem;
+package EMS;
 
+import Customer.*;
+import EMS.Welcome;
 import javax.swing.JOptionPane;
+import ServiceProvider.*;
 
 /**
  *
@@ -148,12 +151,12 @@ public class Login extends javax.swing.JFrame {
         int count = 0;
         switch (role) {
             case 1:
-                Customer c = new Customer();
-                count = c.Login(email, password, role);
-                long id = c.getId(email);
+                Customer cust = new Customer();
+                count = cust.Login(email, password, role);
+                //long id = c.getId();
                 if (count == 1) {
                     JOptionPane.showMessageDialog(null, "Login Successful", "Welcome", JOptionPane.INFORMATION_MESSAGE);
-                    CustomerOption co = new CustomerOption(id);
+                    CustomerOption co = new CustomerOption(cust);
                     co.setLocation(400, 200);
                     co.setSize(450, 350);
                     co.setVisible(true);
@@ -168,6 +171,19 @@ public class Login extends javax.swing.JFrame {
             case 3:
                 break;
             case 4:
+                serviceProvider sp = new serviceProvider();
+                count = sp.Login(email, password, role);
+                if (count == 1) {
+                    JOptionPane.showMessageDialog(null, "Login Successful", "Welcome", JOptionPane.INFORMATION_MESSAGE);
+                    tableSP tsp = new tableSP(sp);
+                    tsp.setLocation(400, 200);
+                    tsp.setSize(450, 350);
+                    tsp.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Credentials", "Login Failed", JOptionPane.ERROR_MESSAGE);
+                }
+                
                 break;
 
         }

@@ -1,11 +1,11 @@
-package eventmanagementsystem;
+package EMS;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DatabaseConnection {
-    Connection c;
-    Statement s;
+    public Connection c;
+    public Statement s;
     
     public DatabaseConnection(String classname, String url, String username, String password) {
         try {

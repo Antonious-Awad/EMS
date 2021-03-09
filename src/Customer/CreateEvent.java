@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanagementsystem;
+package Customer;
 
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -15,14 +15,14 @@ import javax.swing.JTextField;
  */
 public class CreateEvent extends javax.swing.JFrame {
 
-    long id;
+    Customer cust;
 
     /**
      * Creates new form CreateEvent
      */
-    public CreateEvent(long id) {
+    public CreateEvent(Customer cust) {
         initComponents();
-        this.id = id;
+        this.cust= cust;
     }
 
     /**
@@ -169,15 +169,15 @@ public class CreateEvent extends javax.swing.JFrame {
         String location = this.location.getText();
         int service = this.service.getSelectedIndex();
         String date = ((JTextField) this.date.getDateEditor().getUiComponent()).getText();
-        Customer c = new Customer();
-        int result = c.createEvent(title, description, date, location, service, this.id);
+        //Customer c = new Customer();
+        int result = cust.createEvent(title, description, date, location, service, cust.getId());
         if (result == 1) {
             JOptionPane.showMessageDialog(null, "Event Created", "Success", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Check your Information", "Failed", JOptionPane.ERROR_MESSAGE);
 
         }
-        CustomerOption co = new CustomerOption(id);
+        CustomerOption co = new CustomerOption(cust);
         co.setLocation(400, 200);
         co.setSize(450, 350);
         co.setVisible(true);
@@ -191,7 +191,7 @@ public class CreateEvent extends javax.swing.JFrame {
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
-        CustomerOption co = new CustomerOption(id);
+        CustomerOption co = new CustomerOption(cust);
                     co.setLocation(400, 200);
                     co.setSize(450, 350);
                     co.setVisible(true);

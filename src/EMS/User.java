@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanagementsystem;
+package EMS;
 
+import Customer.Customer;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,10 +19,10 @@ public abstract class User {
     protected long id;
     protected String email;
     protected String pass;
-    protected long phone;
-    protected String address;
+    //protected long phone;
+    //protected String address;
     protected int role_id;
-    DatabaseConnection con;
+    public DatabaseConnection con;
 
     public User() {
         con = new DatabaseConnection("com.microsoft.sqlserver.jdbc.SQLServerDriver"
@@ -31,16 +32,12 @@ public abstract class User {
 
     
     public int createAccount(String email, String pass, long phone, String address,int role_id){
-        this.email = email;
-        this.pass = pass;
-        this.phone = phone;
-        this.address = address;
-        this.role_id = role_id;
+        
         if(!checkPass(pass) && !checkEmail(email)){
             return 0;
         }else{
             String sql = "insert into tblusers(email,password,phone,address,roleid)"
-                    + "values('"+this.email+"','"+this.pass+"','"+this.phone+"','"+this.address+"','"+role_id+"')";
+                    + "values('"+email+"','"+pass+"','"+phone+"','"+address+"','"+role_id+"')";
             int result = con.excuteUpdate(sql);
             return result;
     }
@@ -62,6 +59,10 @@ public abstract class User {
     }
     
     public int Login(String email , String password,int role){
+        this.email = email;
+        this.pass = password;
+        this.role_id = role;
+        this.id = getId(email);
         try {
             if(role != getRole_id(email)){
                 return 0;
@@ -95,7 +96,7 @@ public abstract class User {
             return 0;
         }
     }
-    public long getId(String email) {
+    private long getId(String email) {
         try {
             String sql = "select userid from tblusers " +
                     "where email ='"+email+"'";
@@ -109,4 +110,9 @@ public abstract class User {
             return id;
         }
     }
+
+    public long getId() {
+        return id;
+    }
+    
 }

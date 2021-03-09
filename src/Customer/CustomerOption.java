@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanagementsystem;
+package Customer;
 
 /**
  *
  * @author OWNER
  */
 public class CustomerOption extends javax.swing.JFrame {
-    long id;
+    Customer cust;
     /**
      * Creates new form CustomerOption
      */
-    public CustomerOption(long id) {  
+    public CustomerOption(Customer cust) {  
         initComponents();
-        this.id = id;
+        this.cust = cust;
     }
 
     /**
@@ -95,7 +95,7 @@ public class CustomerOption extends javax.swing.JFrame {
 
     private void eventCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventCActionPerformed
         // TODO add your handling code here:
-        CreateEvent event = new CreateEvent(this.id);
+        CreateEvent event = new CreateEvent(cust);
         event.setLocation(400, 200);
         event.setSize(500,500);
         event.setVisible(true);
@@ -104,7 +104,7 @@ public class CustomerOption extends javax.swing.JFrame {
 
     private void eventMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventMActionPerformed
         // TODO add your handling code here:
-        ManageEvent1 m = new ManageEvent1(this.id);
+        ManageEvent1 m = new ManageEvent1(cust);
         m.setLocation(400, 200);
         m.setSize(800,500);
         m.setVisible(true);
