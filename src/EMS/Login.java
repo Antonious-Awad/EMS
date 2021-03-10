@@ -5,8 +5,9 @@
  */
 package EMS;
 
+import Admin.*;
 import Customer.*;
-import EMS.Welcome;
+import ProjectManager.*;
 import javax.swing.JOptionPane;
 import ServiceProvider.*;
 
@@ -77,7 +78,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Role", "1- Customer", "2- Project Manager", "3- Service Provider", "4- admin" }));
+        role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Role", "1- Customer", "2- Project Manager", "3- Service Provider", "4- Admin" }));
 
         Role.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Role.setText("Role");
@@ -167,10 +168,20 @@ public class Login extends javax.swing.JFrame {
 
                 break;
             case 2:
+                ProjectManager pm = new ProjectManager();
+                count = pm.Login(email, password, role);
+                if (count == 1) {
+                    JOptionPane.showMessageDialog(null, "Login Successful", "Welcome", JOptionPane.INFORMATION_MESSAGE);
+                    PMtable p = new PMtable(pm);
+                    p.setLocation(400, 200);
+                    p.setSize(600, 600);
+                    p.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Credentials", "Login Failed", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             case 3:
-                break;
-            case 4:
                 serviceProvider sp = new serviceProvider();
                 count = sp.Login(email, password, role);
                 if (count == 1) {
@@ -183,9 +194,19 @@ public class Login extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Credentials", "Login Failed", JOptionPane.ERROR_MESSAGE);
                 }
-                
                 break;
-
+            case 4:
+                admin a = new admin();
+                count = a.Login(email, password, role);
+                if (count == 1) {
+                    JOptionPane.showMessageDialog(null, "Login Successful", "Welcome", JOptionPane.INFORMATION_MESSAGE);
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Credentials", "Login Failed", JOptionPane.ERROR_MESSAGE);
+                }
+                break;
+                
+                
         }
     }//GEN-LAST:event_loginActionPerformed
 

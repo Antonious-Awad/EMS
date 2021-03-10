@@ -13,7 +13,8 @@ import Customer.Customer;
 import EMS.Welcome;
 import javax.swing.*;
 import ServiceProvider.serviceProvider;
-
+import ProjectManager.ProjectManager;
+import Admin.admin;
 public class SignUp extends javax.swing.JFrame {
 
     /**
@@ -49,7 +50,7 @@ public class SignUp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Register");
 
-        role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Role", "1- Customer", "2- Admin", "3- Project Manager", "4 - Service Provider" }));
+        role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Role", "1 - Customer ", "2 - Project Manager", "3 - Service Provider", "4 - Admin" }));
         role.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 roleActionPerformed(evt);
@@ -193,10 +194,16 @@ public class SignUp extends javax.swing.JFrame {
                 }
                 break;
             case 2:
+                ProjectManager pm = new ProjectManager();
+                result = pm.createAccount(email, pass, phone, addr, role);
+                if (result == 1) {
+                    JOptionPane.showMessageDialog(null, "Account Created", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Email or Password", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
                 break;
             case 3:
-                break;
-            case 4:
                 serviceProvider sp = new serviceProvider();
                  result = sp.createAccount(email, pass, phone, addr, role);
                 if (result == 1) {
@@ -204,6 +211,16 @@ public class SignUp extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Email or Password", "Error", JOptionPane.INFORMATION_MESSAGE);
                 }
+                break;
+            case 4:
+                admin a = new admin();
+                result = a.createAccount(email, pass, phone, addr, role);
+                if (result == 1) {
+                    JOptionPane.showMessageDialog(null, "Account Created", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Email or Password", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
+                break;
 
         }
         if(result ==1){
