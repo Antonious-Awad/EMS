@@ -1,50 +1,56 @@
+package Admin;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ServiceProvider;
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author OWNER
+ * @author micro
  */
-import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.table.*;
-
-public class tableSP extends javax.swing.JFrame {
+public class Show_Events extends javax.swing.JFrame {
 
     /**
-     * Creates new form tableSP
+     * Creates new form Show_Events
      */
-    DefaultTableModel dtm = new DefaultTableModel();
-    serviceProvider sp = new serviceProvider();
-    public tableSP(serviceProvider sp) {
+    DefaultTableModel dtm=new  DefaultTableModel();
+    admin a;
+    public Show_Events(admin a)  {
         try {
             initComponents();
-            this.sp = sp;
-            table.setModel(dtm);
+            this.a = a;
+            mytable.setModel(dtm);
             dtm.addColumn("Event ID");
-            dtm.addColumn("Name");
+            dtm.addColumn("Event Name");
             dtm.addColumn("Description");
-            dtm.addColumn("Service Type");
+            dtm.addColumn("Service");
             dtm.addColumn("Location");
             dtm.addColumn("Date");
             dtm.addColumn("Status");
             dtm.addColumn("Customer ID");
-            ResultSet rs = this.sp.showEvents();
-            while(rs.next()){
+            ResultSet rs =a.showEvents();
+            while (rs.next()){
                 dtm.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)
-                ,rs.getString(6),rs.getString(7),rs.getInt(8)});
+                        ,rs.getString(6),rs.getString(7),rs.getInt(8)});
             }
         } catch (SQLException ex) {
-            Logger.getLogger(tableSP.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Show_Events.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-
+       
+   
+       
     }
 
     /**
@@ -57,13 +63,13 @@ public class tableSP extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        mytable = new javax.swing.JTable();
         update = new javax.swing.JButton();
-        logout = new javax.swing.JButton();
+        exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        table.setModel(new javax.swing.table.DefaultTableModel(
+        mytable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -74,38 +80,43 @@ public class tableSP extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(table);
+        jScrollPane1.setViewportView(mytable);
 
-        update.setText("Update Requests");
+        update.setText("Update");
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateActionPerformed(evt);
             }
         });
 
-        logout.setText("Logout");
+        exit.setText("Exit");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(148, 148, 148)
-                .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addGap(108, 108, 108)
+                .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(update)
-                    .addComponent(logout))
-                .addGap(52, 52, 52))
+                    .addComponent(exit))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,15 +124,25 @@ public class tableSP extends javax.swing.JFrame {
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
-        int row = table.getSelectedRow();
-        int Eventid= (int) table.getValueAt(row,0);
-        int custId= (int) table.getValueAt(row,7);
-        ApproveEvent m = new ApproveEvent(custId, Eventid,sp);
+        int row = mytable.getSelectedRow();
+        int Eventid= (int) mytable.getValueAt(row,0);
+        int custId= (int) mytable.getValueAt(row,7);
+        ApproveEvent m = new ApproveEvent(custId, Eventid,a);
         m.setLocation(400, 200);
         m.setSize(500,500);
         m.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_updateActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        // TODO add your handling code here:
+        adminMenu am = new adminMenu(a);
+        am.setLocation(400, 200);
+        am.setSize(500, 500);
+        am.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_exitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,28 +161,28 @@ public class tableSP extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(tableSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Show_Events.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(tableSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Show_Events.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(tableSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Show_Events.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(tableSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Show_Events.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new tableSP().setVisible(true);
+                    //new Show_Events().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton exit;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton logout;
-    private javax.swing.JTable table;
+    private javax.swing.JTable mytable;
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

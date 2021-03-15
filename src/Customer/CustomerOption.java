@@ -113,6 +113,11 @@ public class CustomerOption extends javax.swing.JFrame {
 
     private void contactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactActionPerformed
         // TODO add your handling code here:
+        Chat_C chat = new Chat_C();
+        chat.setLocation(400, 200);
+        chat.setSize(420,320);
+        chat.setVisible(true);
+        
     }//GEN-LAST:event_contactActionPerformed
 
     /**

@@ -11,10 +11,11 @@ package ProjectManager;
  */
 import EMS.*;
 import java.sql.ResultSet;
-public class ProjectManager extends User{
+public class ProjectManager extends User implements checkRequest{
 
     public ProjectManager() {
     }
+    @Override
     public ResultSet showEvents(){
     String sql ="select eventid,eventname,description,servicename,location,date,s.statusname,customer_id"
             + " from events as e"
@@ -33,11 +34,13 @@ public class ProjectManager extends User{
         ResultSet rs = con.executeQuery(sql);
         return rs;
     }
+    @Override
     public int approve(long eID){
-        String sql ="update events set statusid=2 where eventid= "+eID;
+        String sql ="update events set statusid=3 where eventid= "+eID;
         int result = con.excuteUpdate(sql);
         return result;
     }
+    @Override
     public int decline(long eID){
         
         String sql ="update events set statusid=6 where eventid= "+eID;

@@ -174,7 +174,7 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Login Successful", "Welcome", JOptionPane.INFORMATION_MESSAGE);
                     PMtable p = new PMtable(pm);
                     p.setLocation(400, 200);
-                    p.setSize(600, 600);
+                    p.setSize(800, 500);
                     p.setVisible(true);
                     this.dispose();
                 } else {
@@ -188,7 +188,7 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Login Successful", "Welcome", JOptionPane.INFORMATION_MESSAGE);
                     tableSP tsp = new tableSP(sp);
                     tsp.setLocation(400, 200);
-                    tsp.setSize(450, 350);
+                    tsp.setSize(800, 500);
                     tsp.setVisible(true);
                     this.dispose();
                 } else {
@@ -200,7 +200,11 @@ public class Login extends javax.swing.JFrame {
                 count = a.Login(email, password, role);
                 if (count == 1) {
                     JOptionPane.showMessageDialog(null, "Login Successful", "Welcome", JOptionPane.INFORMATION_MESSAGE);
-                    
+                    adminMenu am = new adminMenu(a);
+                    am.setLocation(400, 200);
+                    am.setSize(450, 400);
+                    am.setVisible(true);
+                    this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Credentials", "Login Failed", JOptionPane.ERROR_MESSAGE);
                 }

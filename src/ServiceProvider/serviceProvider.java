@@ -12,11 +12,12 @@ import java.sql.*;
  *
  * @author OWNER
  */
-public class serviceProvider extends User {
+public class serviceProvider extends User implements checkRequest {
 
     public serviceProvider() {
 
     }
+    @Override
     public ResultSet showEvents(){
     String sql ="select eventid,eventname,description,servicename,location,date,s.statusname,customer_id"
             + " from events as e"
@@ -27,6 +28,27 @@ public class serviceProvider extends User {
             + " where e.statusid = 3";
     ResultSet rs = con.executeQuery(sql);
     return rs;
+    }
+
+    @Override
+    public int approve(long eID) {
+        String sql ="update events set statusid=5 where eventid= "+eID;
+        int result = con.excuteUpdate(sql);
+        return result;
+    }
+
+    @Override
+    public int decline(long eID) {
+        String sql ="update events set statusid=6 where eventid= "+eID;
+        int result = con.excuteUpdate(sql);
+        return result;
+    }
+
+    @Override
+    public ResultSet getInfo(long eID) {
+        String sql = "select eventname,date from events where eventid= "+eID ;
+        ResultSet rs = con.executeQuery(sql);
+        return rs;
     }
     
 }

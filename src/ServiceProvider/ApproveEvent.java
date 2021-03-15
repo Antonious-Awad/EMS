@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ProjectManager;
+package ServiceProvider;
 
 /**
  *
  * @author OWNER
  */
+import ProjectManager.*;
 import Customer.*;
 import java.sql.*;
 import java.text.ParseException;
@@ -25,17 +26,17 @@ public class ApproveEvent extends javax.swing.JFrame {
      */
     long eID;
     long cID;
-    ProjectManager pm;
+    serviceProvider sp;
 
-    public ApproveEvent(long cID, long eID, ProjectManager pm) {
+    public ApproveEvent(long cID, long eID, serviceProvider sp) {
         try {
             initComponents();
             this.cID = cID;
             this.eID = eID;
-            this.pm = pm;
+            this.sp = sp;
             customerID.setText(cID + "");
             eventid.setText(eID + "");
-            ResultSet rs = pm.getInfo(eID);
+            ResultSet rs = sp.getInfo(eID);
             while (rs.next()) {
                 Ename.setText(rs.getString(1));
                 java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString(2));
@@ -205,15 +206,15 @@ public class ApproveEvent extends javax.swing.JFrame {
         int result = 0;
         switch (index) {
             case 0:
-                result = pm.approve(eID);
+                result = sp.approve(eID);
                 break;
             case 1:
-                result = pm.decline(eID);
+                result = sp.decline(eID);
                 break;
         }
         if (result == 1) {
             JOptionPane.showMessageDialog(null, "Event Updated", "Success", JOptionPane.INFORMATION_MESSAGE);
-            PMtable t = new PMtable(pm);
+            tableSP t = new tableSP(sp);
             t.setLocation(400, 200);
             t.setSize(800, 500);
             t.setVisible(true);
@@ -227,7 +228,7 @@ public class ApproveEvent extends javax.swing.JFrame {
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
-        PMtable t = new PMtable(pm);
+         tableSP t = new tableSP(sp);
             t.setLocation(400, 200);
             t.setSize(800, 500);
             t.setVisible(true);
@@ -268,6 +269,14 @@ public class ApproveEvent extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ApproveEvent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
