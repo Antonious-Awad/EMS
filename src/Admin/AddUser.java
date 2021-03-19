@@ -213,7 +213,7 @@ public class AddUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         Show_Users su = new Show_Users(a);
         su.setLocation(400, 200);
-        su.setSize(450, 150);
+        su.setSize(800,550);
         su.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backActionPerformed

@@ -32,10 +32,10 @@ public class ManageEvent1 extends javax.swing.JFrame {
             dtm.addColumn("Service Type");
             dtm.addColumn("Location");
             dtm.addColumn("Date");
-            //Customer c = new Customer();
             ResultSet rs = cust.showEvents(this.cust.getId());
             while (rs.next()){
-                dtm.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
+                dtm.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4)
+                        ,rs.getString(5),rs.getString(6)});
             }
             
         } catch (SQLException ex) {
@@ -139,10 +139,10 @@ public class ManageEvent1 extends javax.swing.JFrame {
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
         CustomerOption co = new CustomerOption(cust);
-                    co.setLocation(400, 200);
-                    co.setSize(450, 350);
-                    co.setVisible(true);
-                    this.dispose();
+        co.setLocation(400, 200);
+        co.setSize(600, 350);
+        co.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ExitActionPerformed
 
     /**

@@ -29,7 +29,7 @@
                   <Component id="users" max="32767" attributes="0"/>
                   <Component id="jLabel1" max="32767" attributes="0"/>
                   <Component id="event" max="32767" attributes="0"/>
-                  <Component id="jButton3" max="32767" attributes="0"/>
+                  <Component id="logout" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="141" max="32767" attributes="0"/>
           </Group>
@@ -45,7 +45,7 @@
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="users" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+              <Component id="logout" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="45" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -76,10 +76,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usersActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="logout">
       <Properties>
-        <Property name="text" type="java.lang.String" value="LogOut"/>
+        <Property name="text" type="java.lang.String" value="Logout"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

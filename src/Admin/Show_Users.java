@@ -57,7 +57,7 @@ public class Show_Users extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         add = new javax.swing.JButton();
         update = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("User_List");
@@ -94,8 +94,13 @@ public class Show_Users extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton3.setText("Exit");
+        exit.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        exit.setText("Exit");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,7 +117,7 @@ public class Show_Users extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addComponent(update)
                 .addGap(45, 45, 45)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(128, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -126,7 +131,7 @@ public class Show_Users extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(add)
                     .addComponent(update)
-                    .addComponent(jButton3))
+                    .addComponent(exit))
                 .addGap(19, 19, 19))
         );
 
@@ -153,6 +158,15 @@ public class Show_Users extends javax.swing.JFrame {
         au.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        // TODO add your handling code here:
+        adminMenu am = new adminMenu(a);
+        am.setLocation(400, 200);
+        am.setSize(410, 350);
+        am.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_exitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,7 +205,7 @@ public class Show_Users extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;

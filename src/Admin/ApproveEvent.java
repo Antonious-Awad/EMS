@@ -231,7 +231,7 @@ public class ApproveEvent extends javax.swing.JFrame {
         // TODO add your handling code here:
         Show_Events se = new Show_Events(a);
         se.setLocation(400, 200);
-        se.setSize(800, 500);
+        se.setSize(600, 400);
         se.setVisible(true);
         this.dispose();
 

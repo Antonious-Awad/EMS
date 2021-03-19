@@ -25,29 +25,32 @@ public class ManageEvent2 extends javax.swing.JFrame {
     long eID;
     Customer cust;
 
-    public ManageEvent2(long eID, Customer cust) {
+    public ManageEvent2(int eID, Customer cust) {
         try {
             initComponents();
             this.cust = cust;
+            ResultSet rs1 = cust.getServices();
+            while (rs1.next()) {
+                service.addItem(rs1.getString(1));
+
+            }
             eventid.setText(eID + "");
             //Customer c = new Customer();
             ResultSet rs = this.cust.getEventInfo(eID);
             while (rs.next()) {
                 Ename.setText(rs.getString(1));
                 desc.setText(rs.getString(2));
-                service.setSelectedIndex(rs.getInt(3));
+                service.setSelectedItem(rs.getString(3));
                 loc.setText(rs.getString(4));
                 java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString(5));
                 edate.setDate(date);
-                
-
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ManageEvent2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(ManageEvent2.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
+        } finally {
             this.eID = eID;
             //this.cID = cID;
         }
@@ -125,7 +128,7 @@ public class ManageEvent2 extends javax.swing.JFrame {
         desc.setRows(5);
         jScrollPane1.setViewportView(desc);
 
-        service.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Service", "1-wedding", "2-engagment", "3-birthday", "4-party" }));
+        service.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Service" }));
         service.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 serviceActionPerformed(evt);
@@ -160,13 +163,13 @@ public class ManageEvent2 extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
                     .addComponent(service, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(162, 162, 162)
+                .addGap(56, 56, 56)
                 .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91)
+                .addGap(52, 52, 52)
                 .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGap(52, 52, 52)
                 .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -226,7 +229,6 @@ public class ManageEvent2 extends javax.swing.JFrame {
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
-        //Customer c = new Customer();
         int result = cust.deleteEvent(Integer.parseInt(eventid.getText()));
         if (result == 1) {
             JOptionPane.showMessageDialog(null, "Event Deleted", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -234,6 +236,7 @@ public class ManageEvent2 extends javax.swing.JFrame {
             m.setLocation(400, 200);
             m.setSize(800, 500);
             m.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Process Failed", "Error", JOptionPane.ERROR_MESSAGE);
 
@@ -242,35 +245,43 @@ public class ManageEvent2 extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-        // TODO add your handling code here:
-        int ID = Integer.parseInt(eventid.getText());
-        String name = Ename.getText();
-        String describ = desc.getText();
-        int service = this.service.getSelectedIndex();
-        String loc = this.loc.getText();
-        String date = ((JTextField) this.edate.getDateEditor().getUiComponent()).getText();
-        //Customer c = new Customer();
-        int result = cust.updateEvent(ID, name, describ, service, loc, date);
-        if (result == 1) {
-            JOptionPane.showMessageDialog(null, "Event Updated", "Success", JOptionPane.INFORMATION_MESSAGE);
-            ManageEvent1 m = new ManageEvent1(cust);
-            m.setLocation(400, 200);
-            m.setSize(800, 500);
-            m.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Process Failed", "Error", JOptionPane.ERROR_MESSAGE);
+        try {
+            // TODO add your handling code here:
+            int ID = Integer.parseInt(eventid.getText());
+            String name = Ename.getText();
+            String describ = desc.getText();
+            String service = this.service.getSelectedItem().toString();
+            ResultSet rs = cust.getServiceID(service);
+            int serviceID = 0;
+            while (rs.next()) {
+                serviceID = rs.getInt(1);
+            }
+            String loc = this.loc.getText();
+            String date = ((JTextField) this.edate.getDateEditor().getUiComponent()).getText();
+            int result = cust.updateEvent(ID, name, describ, serviceID, loc, date);
+            if (result == 1) {
+                JOptionPane.showMessageDialog(null, "Event Updated", "Success", JOptionPane.INFORMATION_MESSAGE);
+                ManageEvent1 m = new ManageEvent1(cust);
+                m.setLocation(400, 200);
+                m.setSize(800, 500);
+                m.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Process Failed", "Error", JOptionPane.ERROR_MESSAGE);
 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ManageEvent2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_updateActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
         ManageEvent1 m = new ManageEvent1(cust);
-            m.setLocation(400, 200);
-            m.setSize(800, 500);
-            m.setVisible(true);
-            this.dispose();
+        m.setLocation(400, 200);
+        m.setSize(800, 500);
+        m.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_exitActionPerformed
 
     /**

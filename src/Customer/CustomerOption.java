@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Customer;
-
+import EMS.Login;
 /**
  *
  * @author OWNER
@@ -32,7 +32,9 @@ public class CustomerOption extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         eventC = new javax.swing.JButton();
         eventM = new javax.swing.JButton();
-        contact = new javax.swing.JButton();
+        pending = new javax.swing.JButton();
+        accepted = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
 
         button1.setLabel("button1");
 
@@ -56,10 +58,24 @@ public class CustomerOption extends javax.swing.JFrame {
             }
         });
 
-        contact.setText("Contact PM");
-        contact.addActionListener(new java.awt.event.ActionListener() {
+        pending.setText("Pending/Refused Events");
+        pending.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contactActionPerformed(evt);
+                pendingActionPerformed(evt);
+            }
+        });
+
+        accepted.setText("Accepted Events");
+        accepted.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acceptedActionPerformed(evt);
+            }
+        });
+
+        logout.setText("Logout");
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
             }
         });
 
@@ -67,27 +83,41 @@ public class CustomerOption extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(107, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(contact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(eventC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(eventM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(106, 106, 106))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(eventM, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eventC, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pending, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(accepted, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(191, 191, 191)
+                        .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(eventC)
-                .addGap(35, 35, 35)
-                .addComponent(eventM)
-                .addGap(35, 35, 35)
-                .addComponent(contact)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(eventC)
+                    .addComponent(pending))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(eventM)
+                    .addComponent(accepted))
+                .addGap(30, 30, 30)
+                .addComponent(logout)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,14 +141,34 @@ public class CustomerOption extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_eventMActionPerformed
 
-    private void contactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactActionPerformed
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
-        Chat_C chat = new Chat_C();
-        chat.setLocation(400, 200);
-        chat.setSize(420,320);
-        chat.setVisible(true);
+        Login l = new Login();
+        l.setLocation(400,200);
+        l.setSize(450,350);
+        l.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_logoutActionPerformed
+
+    private void pendingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendingActionPerformed
+        // TODO add your handling code here:
+        pending p = new pending(cust);
+        p.setLocation(400, 200);
+        p.setSize(600,400);
+        p.setVisible(true);
+        this.dispose();
         
-    }//GEN-LAST:event_contactActionPerformed
+    }//GEN-LAST:event_pendingActionPerformed
+
+    private void acceptedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptedActionPerformed
+        // TODO add your handling code here:
+        accepted a = new accepted(cust);
+        a.setLocation(400, 200);
+        a.setSize(600,400);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_acceptedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,10 +206,12 @@ public class CustomerOption extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton accepted;
     private java.awt.Button button1;
-    private javax.swing.JButton contact;
     private javax.swing.JButton eventC;
     private javax.swing.JButton eventM;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton logout;
+    private javax.swing.JButton pending;
     // End of variables declaration//GEN-END:variables
 }

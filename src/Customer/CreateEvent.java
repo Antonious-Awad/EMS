@@ -8,6 +8,10 @@ package Customer;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,8 +25,17 @@ public class CreateEvent extends javax.swing.JFrame {
      * Creates new form CreateEvent
      */
     public CreateEvent(Customer cust) {
-        initComponents();
-        this.cust= cust;
+        try {
+            initComponents();
+            this.cust = cust;
+            ResultSet rs = cust.getServices();
+            while (rs.next()) {
+                service.addItem(rs.getString(1));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateEvent.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -73,7 +86,12 @@ public class CreateEvent extends javax.swing.JFrame {
 
         jLabel5.setText("Service");
 
-        service.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Service", "Wedding", "Engagment", "Birthday", "Party" }));
+        service.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Service" }));
+        service.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                serviceActionPerformed(evt);
+            }
+        });
 
         date.setDateFormatString("yyyy-MM-dd");
 
@@ -163,25 +181,34 @@ public class CreateEvent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-        // TODO add your handling code here:
-        String title = this.title.getText();
-        String description = describ.getText();
-        String location = this.location.getText();
-        int service = this.service.getSelectedIndex();
-        String date = ((JTextField) this.date.getDateEditor().getUiComponent()).getText();
-        //Customer c = new Customer();
-        int result = cust.createEvent(title, description, date, location, service, cust.getId());
-        if (result == 1) {
-            JOptionPane.showMessageDialog(null, "Event Created", "Success", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Check your Information", "Failed", JOptionPane.ERROR_MESSAGE);
+        try {
+            // TODO add your handling code here:
+            String title = this.title.getText();
+            String description = describ.getText();
+            String location = this.location.getText();
+            String servicename = this.service.getSelectedItem().toString();
+            int serviceID = 0;
+            ResultSet rs = cust.getServiceID(servicename);
+            while (rs.next()) {
+                serviceID = rs.getInt(1);
+            }
+            String date = ((JTextField) this.date.getDateEditor().getUiComponent()).getText();
+            //Customer c = new Customer();
+            int result = cust.createEvent(title, description, date, location, serviceID, cust.getId());
+            if (result == 1) {
+                JOptionPane.showMessageDialog(null, "Event Created", "Success", JOptionPane.INFORMATION_MESSAGE);
+                CustomerOption co = new CustomerOption(cust);
+                co.setLocation(400, 200);
+                co.setSize(600, 350);
+                co.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Check your Information", "Failed", JOptionPane.ERROR_MESSAGE);
 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
-        CustomerOption co = new CustomerOption(cust);
-        co.setLocation(400, 200);
-        co.setSize(450, 350);
-        co.setVisible(true);
-        this.dispose();
 
     }//GEN-LAST:event_saveActionPerformed
 
@@ -192,11 +219,15 @@ public class CreateEvent extends javax.swing.JFrame {
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
         CustomerOption co = new CustomerOption(cust);
-                    co.setLocation(400, 200);
-                    co.setSize(450, 350);
-                    co.setVisible(true);
-                    this.dispose();
+        co.setLocation(400, 200);
+        co.setSize(600, 350);
+        co.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ExitActionPerformed
+
+    private void serviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_serviceActionPerformed
 
     /**
      * @param args the command line arguments

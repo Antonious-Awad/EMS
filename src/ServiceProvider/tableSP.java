@@ -59,7 +59,7 @@ public class tableSP extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         update = new javax.swing.JButton();
-        logout = new javax.swing.JButton();
+        exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,7 +83,12 @@ public class tableSP extends javax.swing.JFrame {
             }
         });
 
-        logout.setText("Logout");
+        exit.setText("Exit");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,7 +99,7 @@ public class tableSP extends javax.swing.JFrame {
                 .addGap(84, 84, 84)
                 .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(148, 148, 148)
-                .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -104,7 +109,7 @@ public class tableSP extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(update)
-                    .addComponent(logout))
+                    .addComponent(exit))
                 .addGap(52, 52, 52))
         );
 
@@ -122,6 +127,15 @@ public class tableSP extends javax.swing.JFrame {
         m.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_updateActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        // TODO add your handling code here:
+        SPmenu spm = new SPmenu(sp);
+        spm.setLocation(400, 200);
+        spm.setSize(410, 350);
+        spm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_exitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,8 +173,8 @@ public class tableSP extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton exit;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton logout;
     private javax.swing.JTable table;
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables

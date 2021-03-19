@@ -42,14 +42,14 @@
                   <Component id="service" max="32767" attributes="0"/>
                   <Component id="edate" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="296" max="32767" attributes="0"/>
+              <EmptySpace pref="124" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               <Component id="delete" min="-2" pref="96" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               <Component id="update" min="-2" pref="101" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               <Component id="exit" min="-2" pref="91" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
@@ -185,12 +185,8 @@
     <Component class="javax.swing.JComboBox" name="service">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="1">
             <StringItem index="0" value="Select Service"/>
-            <StringItem index="1" value="1-wedding"/>
-            <StringItem index="2" value="2-engagment"/>
-            <StringItem index="3" value="3-birthday"/>
-            <StringItem index="4" value="4-party"/>
           </StringArray>
         </Property>
       </Properties>

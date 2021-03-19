@@ -159,7 +159,7 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Login Successful", "Welcome", JOptionPane.INFORMATION_MESSAGE);
                     CustomerOption co = new CustomerOption(cust);
                     co.setLocation(400, 200);
-                    co.setSize(450, 350);
+                    co.setSize(600, 350);
                     co.setVisible(true);
                     this.dispose();
                 } else {
@@ -186,9 +186,9 @@ public class Login extends javax.swing.JFrame {
                 count = sp.Login(email, password, role);
                 if (count == 1) {
                     JOptionPane.showMessageDialog(null, "Login Successful", "Welcome", JOptionPane.INFORMATION_MESSAGE);
-                    tableSP tsp = new tableSP(sp);
+                    SPmenu tsp = new SPmenu(sp);
                     tsp.setLocation(400, 200);
-                    tsp.setSize(800, 500);
+                    tsp.setSize(410, 350);
                     tsp.setVisible(true);
                     this.dispose();
                 } else {
@@ -202,7 +202,7 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Login Successful", "Welcome", JOptionPane.INFORMATION_MESSAGE);
                     adminMenu am = new adminMenu(a);
                     am.setLocation(400, 200);
-                    am.setSize(450, 400);
+                    am.setSize(410, 350);
                     am.setVisible(true);
                     this.dispose();
                 } else {

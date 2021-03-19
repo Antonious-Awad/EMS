@@ -16,7 +16,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public abstract class User {
-    protected long id;
+    protected int id;
     protected String email;
     protected String pass;
     //protected long phone;
@@ -96,13 +96,13 @@ public abstract class User {
             return 0;
         }
     }
-    private long getId(String email) {
+    private int getId(String email) {
         try {
             String sql = "select userid from tblusers " +
                     "where email ='"+email+"'";
             ResultSet rs =con.executeQuery(sql);
             while(rs.next()){
-                 id = rs.getLong(1);
+                 id = rs.getInt(1);
             }
             return id ;
         } catch (SQLException ex) {
@@ -111,8 +111,14 @@ public abstract class User {
         }
     }
 
-    public long getId() {
+    public int getId() {
         return id;
+    }
+    public ResultSet getServices(){
+        String sql = "select servicename from services";
+        ResultSet rs= con.executeQuery(sql);
+        return rs;
+    
     }
     
 }

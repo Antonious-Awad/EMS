@@ -50,5 +50,18 @@ public class serviceProvider extends User implements checkRequest {
         ResultSet rs = con.executeQuery(sql);
         return rs;
     }
+    public int addService(String name ,int price){
+        String sql = "insert into services "
+                + "values('"+name+"','"+price+"')";
+        return con.excuteUpdate(sql);
+    }
+    public int deleteService(int id){
+        String sql = "delete from services where serviceid=" + id;
+        return con.excuteUpdate(sql);
+    }
+    public ResultSet getServiceID(String serviceName){
+        String sql = "Select serviceid from services where servicename = '"+serviceName+"'";
+        return con.executeQuery(sql);
+    }
     
 }

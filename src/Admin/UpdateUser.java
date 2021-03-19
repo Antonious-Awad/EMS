@@ -197,9 +197,9 @@ public class UpdateUser extends javax.swing.JFrame {
                     .addComponent(role, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(update)
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(update))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(back)
                 .addContainerGap())
@@ -252,7 +252,7 @@ public class UpdateUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         Show_Users su = new Show_Users(a);
         su.setLocation(400, 200);
-        su.setSize(450, 150);
+        su.setSize(800,550);
         su.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
@@ -261,7 +261,7 @@ public class UpdateUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         int result = a.delete(Integer.parseInt(id.getText()));
         if (result == 1) {
-            JOptionPane.showMessageDialog(null, "Account Updated", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Account Deleted", "Success", JOptionPane.INFORMATION_MESSAGE);
             Show_Users su = new Show_Users(a);
             su.setLocation(400, 200);
             su.setSize(800, 550);

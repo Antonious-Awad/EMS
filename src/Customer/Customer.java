@@ -27,13 +27,13 @@ public class Customer extends User {
         this.role_id = 1;
     }
     public int createEvent(String eventTitle, String eventDescription, String date,
-            String location, int serviceId, long customer_id) {
+            String location, int serviceId, int customer_id) {
         String sql = "INSERT INTO events (eventname,description,location,date,serviceid,customer_id)"
                 + " VALUES('" + eventTitle + "','" + eventDescription + "','" + location + "','" + date + "','" + serviceId + "','" + customer_id + "')";
         int result = con.excuteUpdate(sql);
         return result;
     }
-    public ResultSet showEvents(long customerID ){
+    public ResultSet showEvents(int customerID ){
         String sql = "Select eventid,eventname,description,servicename,location,date\n"+
                     "From events\n"+
                     "join services\n"+
@@ -43,21 +43,22 @@ public class Customer extends User {
         return rs;
     }
     
-    public ResultSet getEventInfo(long eID){
-        
-       String sql ="select eventname,description,serviceid,location,date\n"+
-               "from events\n"+
+    public ResultSet getEventInfo(int eID){    
+       String sql ="select eventname,description,servicename,location,date\n"+
+               "from events as e\n"+
+               "join services as s\n"+
+               "on e.serviceid = s.serviceid\n"+
                "where eventid= "+ eID ;
        return con.executeQuery(sql);
         
     }
-    public int deleteEvent(long eID)
+    public int deleteEvent(int eID)
     {
       String sql ="delete from events where eventid= "+ eID;
               
               return con.excuteUpdate(sql);
     }
-    public int updateEvent(long eID,String name ,String desc,int service, String loc , String date ){
+    public int updateEvent(int eID,String name ,String desc,int service, String loc , String date ){
         String sql="update events set eventname= '"+name+"', "
         + "description ='"+desc+"', "
         + "serviceid ='"+service+"', "
@@ -66,4 +67,27 @@ public class Customer extends User {
         + "where eventid =" +eID;
         return con.excuteUpdate(sql);
     }
+    public ResultSet getServiceID(String serviceName){
+        String sql = "Select serviceid from services where servicename = '"+serviceName+"'";
+        return con.executeQuery(sql);
+    }
+    public ResultSet acceptedEvent (int customerID){
+        String sql ="select eventid ,eventname ,statusname,servicename ,price  from events as e "
+                + " join services as s"
+                + " on e.serviceid = s.serviceid"
+                + " join status as st "
+                + "on st.statusid = e.statusid "
+                + "where e.statusid = 5 and customer_id = "+customerID;
+                return con.executeQuery(sql);
+    }
+    public ResultSet pendingEvent (int customerID){
+        String sql ="select eventid ,eventname ,servicename,statusname  from events as e "
+                + " join services as s"
+                + " on e.serviceid = s.serviceid"
+                + " join status as st "
+                + "on st.statusid = e.statusid "
+                + "where e.statusid <> 5 and customer_id = "+customerID;
+                return con.executeQuery(sql);
+    }
+    
 }

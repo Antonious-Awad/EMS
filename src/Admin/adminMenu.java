@@ -5,6 +5,8 @@
  */
 package Admin;
 
+import EMS.Login;
+
 /**
  *
  * @author OWNER
@@ -32,7 +34,7 @@ public class adminMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         event = new javax.swing.JButton();
         users = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,7 +55,12 @@ public class adminMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("LogOut");
+        logout.setText("Logout");
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,7 +72,7 @@ public class adminMenu extends javax.swing.JFrame {
                     .addComponent(users, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(event, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(141, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -78,7 +85,7 @@ public class adminMenu extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addComponent(users)
                 .addGap(46, 46, 46)
-                .addComponent(jButton3)
+                .addComponent(logout)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -89,7 +96,7 @@ public class adminMenu extends javax.swing.JFrame {
         // TODO add your handling code here:        
         Show_Events se = new Show_Events(a);
         se.setLocation(400, 200);
-        se.setSize(800, 500);
+        se.setSize(600, 400);
         se.setVisible(true);
         this.dispose();
 
@@ -103,6 +110,15 @@ public class adminMenu extends javax.swing.JFrame {
         su.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_usersActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+        Login l = new Login();
+        l.setLocation(400,200);
+        l.setSize(450,350);
+        l.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,8 +157,8 @@ public class adminMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton event;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton logout;
     private javax.swing.JButton users;
     // End of variables declaration//GEN-END:variables
 }
